@@ -1,7 +1,7 @@
 <template>
   <navbar-list/>
-  <div class="container">
-    <section v-if="this.$route.path==='/'" class="hero is-medium is-link hero-custom">
+  <div class="container main-container">
+    <section v-if="this.$route.path ==='/'" class="hero is-medium is-link hero-custom">
   <div class="hero-body">
     <p class="title">
       Medium hero
@@ -52,8 +52,8 @@ export default {
   margin: 0;
   padding: 0;
 }
-.top {
-  margin-top: 1rem;
+.main-container {
+  margin-top: 4rem;
 }
 .hero-custom{
   margin-top: 5.5rem
