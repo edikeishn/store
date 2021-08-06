@@ -2,8 +2,10 @@ package ru.rayyana.store.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.rayyana.store.entity.Cart;
 import ru.rayyana.store.entity.Item;
-import ru.rayyana.store.service.impl.ItemServiceImpl;
+import ru.rayyana.store.service.CartService;
+import ru.rayyana.store.service.ItemService;
 
 import javax.annotation.PostConstruct;
 
@@ -11,10 +13,14 @@ import javax.annotation.PostConstruct;
 public class AppStartItemConfiguration {
 
     @Autowired
-    private ItemServiceImpl itemService;
+    private ItemService itemService;
+
+    @Autowired
+    private CartService cartService;
 
     @PostConstruct
     public void addStartItems() {
+        cartService.saveCart(new Cart());
         itemService.addNewItem(new Item(0,"Товар 1","/assets/items/1.jpg","Товар 1",1.00,5));
         itemService.addNewItem(new Item(0,"Товар 2","/assets/items/2.jpg","Товар 2",2.00,5));
         itemService.addNewItem(new Item(0,"Товар 3","/assets/items/3.jpg","Товар 3",3.00,5));

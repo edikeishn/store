@@ -1,21 +1,21 @@
 <template>
   <div class="box">
     <div class="cart-item__details">
-      <p class="is-inline">{{ cartItem.title }}</p>
+      <p class="is-inline">{{ cartItem.item.title }}</p>
       <div>
         <span class="cart-item--price has-text-primary has-text-weight-bold">
-          ${{ cartItem.price }} x {{ cartItem.quantity }}
+          ${{ cartItem.item.price }} x {{ cartItem.quantity }}
         </span>
         <span>
-          <i @click="addCartItem(cartItem)"
+          <i @click="addCartItem(cartItem.item)"
             class="fa fa-arrow-circle-up cart-item__modify"></i>
-          <i @click="removeCartItem(cartItem)"
+          <i @click="removeCartItem(cartItem.item)"
             class="fa fa-arrow-circle-down cart-item__modify"></i>
         </span>
       </div>
     </div>
     <div class="cart-item__image">
-      <img :src="cartItem.image" />
+      <img :src="cartItem.item.image" />
     </div>
   </div>
 </template>

@@ -1,4 +1,4 @@
-
+import axios from 'axios';
 const state = {
   cartItems: [],
 
@@ -12,21 +12,18 @@ const mutations = {
 
 const actions = {
 
+  getCartItems ({ commit }) {
+  axios.get('/api/cart').then((response) => {
+    commit('UPDATE_CART_ITEMS', response.data)
+  });
+},
+
 
   addCartItem ({ commit }, cartItem) {
-      let cartProductExists = false;
-      const cartProducts = JSON.parse(JSON.stringify(this.getters.cartItems));
-      cartProducts.map((cartProduct) => {
-      if (cartProduct.id === cartItem.id) {
-      cartProduct.quantity++;
-      cartProductExists = true;
-   }
- });
-    if(!cartProductExists) {
-      cartItem.quantity = 1;
-      cartProducts.push(cartItem);
-    }
-      commit('UPDATE_CART_ITEMS', cartProducts);
+      axios.post('/api/cart', cartItem).then((response) => {
+      commit('UPDATE_CART_ITEMS', response.data)
+      });
+
 },
 
   removeCartItem ({ commit }, cartItem) {
@@ -44,7 +41,9 @@ commit('UPDATE_CART_ITEMS', cartProducts);
   },
 
   removeAllCartItems ({ commit }) {
-  commit('UPDATE_CART_ITEMS', []);
+    axios.post('/api/cart/removeAllItems').then(() => {
+    commit('UPDATE_CART_ITEMS', [])
+    });
   }
 }
 
@@ -52,7 +51,7 @@ const getters = {
   cartItems: state => state.cartItems,
   cartTotal: state => {
     return state.cartItems.reduce((acc, cartItem) => {
-      return (cartItem.quantity * cartItem.price) + acc;
+      return (cartItem.quantity * cartItem.item.price) + acc;
     }, 0).toFixed(2);
   },
   cartQuantity: state => {

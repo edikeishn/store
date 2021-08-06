@@ -1,5 +1,6 @@
 package ru.rayyana.store.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,19 +12,22 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item implements Serializable {
-
+public class CartItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue
     private long id;
 
-    private String title;
-    private String image;
-    private String description;
-    private double price;
-    private double quantity;
+    @ManyToOne
+    @JoinColumn(name="item_id", nullable=false)
+    private Item item;
 
+    private int quantity;
+
+    @ManyToOne
+    @JoinColumn(name="cart_id", nullable=true)
+    @JsonIgnore
+    private Cart cart;
 
 }
