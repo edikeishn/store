@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -23,7 +25,7 @@ public class Cart implements Serializable {
     private long id;
 
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "cart", orphanRemoval = true)
-    private List<CartItem> cartItems = new ArrayList();
+    private List<CartItem> cartItems = new LinkedList<>();
 
     public void addItemToCart(Item item) {
         AtomicBoolean cartItemExists = new AtomicBoolean(false);
@@ -40,17 +42,19 @@ public class Cart implements Serializable {
             this.cartItems.add(newCartItem);
             newCartItem.setCart(this);
         }
-
     }
 
     public void removeItemFromCart(Item item) {
-        cartItems.forEach(cartItem -> {
+        List<CartItem> currentCartItems = new LinkedList<CartItem>(cartItems);
+        currentCartItems.forEach(cartItem -> {
             if (cartItem.getItem().getId()== item.getId() && cartItem.getQuantity()>1) {
                 cartItem.setQuantity(cartItem.getQuantity()-1);
             }
             else if (cartItem.getItem().getId()== item.getId() && cartItem.getQuantity()==1){
                 cartItem.setCart(null);
                 this.cartItems.remove(cartItem);
+
+
             }
         });
 

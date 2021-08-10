@@ -14,12 +14,18 @@ public class ItemServiceImpl implements ItemService {
     private ItemRepository itemRepository;
 
     @Override
-    public List<Item> finAllItems() {
+    public List<Item> findAllItems() {
         return itemRepository.findAll();
     }
 
     @Override
     public void addNewItem(Item item) {
     itemRepository.save(item);
+    }
+
+    @Override
+    public Item findItemById(Long id) {
+
+        return itemRepository.findById(id).get();
     }
 }

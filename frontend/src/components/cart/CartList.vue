@@ -20,9 +20,9 @@
         </p>
       </div>
     </ul>
-    <router-link to="/checkout">
-     <button :disabled="cartItems.length === 0" class="button is-primary" >
-       Checkout (<span class="has-text-weight-bold">${{ cartTotal }}</span>)
+    <router-link to="/checkout"  >
+     <button :disabled="!cartItems.length" class="button is-primary" >
+       Checkout <span v-if="cartItems.length" class="has-text-weight-bold">&ensp;(${{ cartTotal }})</span>
      </button>
     </router-link>
   </div>

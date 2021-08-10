@@ -5,6 +5,7 @@ import ru.rayyana.store.entity.Item;
 import java.util.List;
 
 public interface ItemService {
-    List<Item> finAllItems();
+    List<Item> findAllItems();
+    Item findItemById(Long id);
     void addNewItem(Item item);
 }

@@ -20,24 +20,16 @@ const actions = {
 
 
   addCartItem ({ commit }, cartItem) {
-      axios.post('/api/cart', cartItem).then((response) => {
+      axios.post('/api/cart/add', cartItem).then((response) => {
       commit('UPDATE_CART_ITEMS', response.data)
       });
 
 },
 
   removeCartItem ({ commit }, cartItem) {
-    const cartProducts = JSON.parse(JSON.stringify(this.getters.cartItems));
-    cartProducts.map((cartProduct) => {
-    if (cartProduct.id === cartItem.id && cartProduct.quantity > 1) {
-    cartProduct.quantity--;
-   }
-   else if (cartProduct.id === cartItem.id && cartProduct.quantity === 1) {
-        const cartIndexToRemove = cartProducts.findIndex(cartProduct => cartProduct.id === cartItem.id);
-        cartProducts.splice(cartIndexToRemove, 1);
-      }
-});
-commit('UPDATE_CART_ITEMS', cartProducts);
+    axios.post('/api/cart/remove', cartItem).then((response) => {
+    commit('UPDATE_CART_ITEMS', response.data)
+    });
   },
 
   removeAllCartItems ({ commit }) {

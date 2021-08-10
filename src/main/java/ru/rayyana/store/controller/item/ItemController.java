@@ -1,7 +1,6 @@
 package ru.rayyana.store.controller.item;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +18,7 @@ public class ItemController {
 
     @GetMapping
     public List<Item> findAllItems() {
-        return itemService.finAllItems();
+        return itemService.findAllItems();
     }
 
 }

@@ -30,4 +30,7 @@ public class CartItem implements Serializable {
     @JsonIgnore
     private Cart cart;
 
+    public long getItemId() {
+        return this.item.getId();
+    }
 }

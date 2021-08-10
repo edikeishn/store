@@ -26,4 +26,11 @@ public class Item implements Serializable {
     private double quantity;
 
 
+    public void quantityPlusOne() {
+        this.quantity++;
+    }
+
+    public void quantityMinusOne() {
+        this.quantity--;
+    }
 }
