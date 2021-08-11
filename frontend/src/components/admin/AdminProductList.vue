@@ -39,6 +39,9 @@ export default {
 
   components: {
     AdminProductListItem
+  },
+  mounted() {
+    this.$store.dispatch("getProductItems");
   }
 }
 </script>

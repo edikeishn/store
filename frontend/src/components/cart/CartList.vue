@@ -3,7 +3,7 @@
     <div class="cart--header has-text-centered">
       <i class="fa fa-2x fa-shopping-cart"></i>
     </div>
-    <p v-if="cartItems.length === 0" class="cart-empty-text has-text-centered">
+    <p v-if="!cartItems.length" class="cart-empty-text has-text-centered">
       Добавьте какой нибудь товар в карзину!
     </p>
     <ul v-if="cartItems.length > 0">
@@ -20,11 +20,11 @@
         </p>
       </div>
     </ul>
-    <router-link to="/checkout"  >
+    <router-link to="/checkout">
      <button :disabled="!cartItems.length" class="button is-primary" >
-       Checkout <span v-if="cartItems.length" class="has-text-weight-bold">&ensp;(${{ cartTotal }})</span>
+       Checkout <span  v-if="cartItems.length" class="has-text-weight-bold">&nbsp;(${{ cartTotal }})</span>
      </button>
-    </router-link>
+   </router-link>
   </div>
 </template>
 
@@ -60,9 +60,7 @@ export default {
 #cart {
   height: 100%;
   padding: 30px 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+
 }
 
 .cart-empty-text {

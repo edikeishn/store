@@ -19,8 +19,18 @@ const actions = {
     });
   },
   addNewItemToStock ({commit}, newItem) {
-    console.log(newItem.title);
-    commit('UPDATE_PRODUCT_ITEMS', this.getters.productItems);
+    let bodyFormData = new FormData();
+    var jsonObjectData = JSON.stringify(newItem);
+    const blob = new Blob([jsonObjectData], {
+    type: 'application/json'
+    });
+    bodyFormData.append('item',blob);
+    if(newItem.file != null) bodyFormData.append('file',newItem.file, newItem.file.name);
+
+    axios.post(`/api/items/addnewitem`,bodyFormData).then((response) => {
+    commit('UPDATE_PRODUCT_ITEMS', response.data);
+
+    });
 
   }
 }

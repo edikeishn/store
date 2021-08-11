@@ -54,6 +54,10 @@ public class CartController {
     @PostMapping("/removeAllItems")
     public void removeAllItemsFromCart(){
         Cart cart = cartService.getCart();
+        List<CartItem> currentCartItems = cart.getCartItems();
+        currentCartItems.forEach(cartItem -> {
+            cartItem.getItem().setQuantity(cartItem.getItem().getQuantity()+cartItem.getQuantity());
+        });
         cart.removeAllItemsFromCart();
         cartService.saveCart(cart);
     }

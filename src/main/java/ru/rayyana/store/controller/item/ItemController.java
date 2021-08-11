@@ -1,9 +1,8 @@
 package ru.rayyana.store.controller.item;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.rayyana.store.entity.Item;
 import ru.rayyana.store.service.ItemService;
 
@@ -19,6 +18,11 @@ public class ItemController {
     @GetMapping
     public List<Item> findAllItems() {
         return itemService.findAllItems();
+    }
+
+    @PostMapping("/addnewitem")
+    public Item addNewItem(@RequestPart (required = false) Item item, @RequestPart (required = false) MultipartFile file){
+        return item;
     }
 
 }
