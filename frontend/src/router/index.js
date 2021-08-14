@@ -5,6 +5,7 @@ import ProductItem from "../components/product/ProductItem.vue"
 import CartList from "../components/cart/CartList.vue"
 import AdminProductList from "../components/admin/AdminProductList.vue"
 import AdminAddProductItem from "../components/admin/AdminAddProductItem.vue"
+import AdminEditProductItem from "../components/admin/AdminEditProductItem.vue"
 import NotFound from '../components/NotFound.vue';
 
 const routes = [
@@ -18,6 +19,12 @@ const routes = [
 
   { path: '/admin/addnewproduct', component: AdminAddProductItem },
 
+  { path: '/admin/editproduct/:id',
+    component: AdminEditProductItem,
+    name: 'editproduct',
+    props: true },
+
+  
   { path: '/product/:id',
     component: ProductItem,
     name: 'itemdetails',

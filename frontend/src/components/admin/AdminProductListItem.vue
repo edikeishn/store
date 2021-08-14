@@ -11,7 +11,7 @@
   <td>{{productItem.quantity}}</td>
   <td>
    <div class="action_block">
-     <button class="button is-small">Редактировать</button>
+     <button class="button is-small" @click="edit">Редактировать</button>
      <button class="button is-small">Удалить</button>
    </div>
   </td>
@@ -24,7 +24,10 @@ export default {
   name: 'AdminProductListItem',
   props: ['productItem', 'index'],
   methods: {
-    ...mapActions(['addCartItem'])
+    ...mapActions(['addCartItem']),
+    edit() {
+      this.$router.push('/admin/editproduct/'+this.productItem.id)
+    }
   },
   computed: {
     available() {

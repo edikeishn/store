@@ -60,22 +60,12 @@ export default {
     }
   },
   methods: {
-    addAndGoToCart(productItem) {
-      this.$store
-        .dispatch('addCartItem', productItem)
-        .then(() => {
-          this.$router.push('/cart');
-          this.getProductItems();
-        });
-    },
+
     fullscreen() {
         this.active ? this.active=false : this.active=true
     },
-    ...mapActions(['addCartItem','getProductItems'])
+    ...mapActions(['addCartItem'])
   },
-  created() {
-    this.getProductItems();
-  }
 }
 </script>
 

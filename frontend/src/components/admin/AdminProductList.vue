@@ -17,9 +17,9 @@
        <th>Действие</th>
      </tr>
     </thead>
-    <tbody>
-      <tr v-for="(productItem, index) in productItems" :key="productItem.id" class="cart-item">
-        <AdminProductListItem :productItem="productItem" :index="index"/>
+    <tbody v-if="productItems">
+      <tr v-for="(item, index) in productItems" :key="item.id" class="cart-item">
+        <AdminProductListItem :productItem="item" :index="index"/>
       </tr>
     </tbody>
    </table>
@@ -40,7 +40,7 @@ export default {
   components: {
     AdminProductListItem
   },
-  mounted() {
+    mounted() {
     this.$store.dispatch("getProductItems");
   }
 }

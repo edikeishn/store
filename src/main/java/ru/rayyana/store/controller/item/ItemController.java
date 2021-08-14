@@ -26,7 +26,24 @@ public class ItemController {
 
     @PostMapping("/addnewitem")
     public Item addNewItem(@RequestPart (required = false) Item item, @RequestPart (required = false) MultipartFile file){
-        imageService.saveImage("33",file);
+        itemService.addNewItem(item);
+        System.out.println(file.getOriginalFilename());
+        item.setImage(imageService.saveImage(item.getId(),file));
+        itemService.addNewItem(item);
+        return item;
+    }
+
+    @PostMapping("/edititem")
+    public Item editItem(@RequestPart (required = false) Item item, @RequestPart (required = false) MultipartFile file){
+        Item currentItem = itemService.findItemById(item.getId());
+        currentItem.setQuantity(item.getQuantity());
+        currentItem.setTitle(item.getTitle());
+        currentItem.setDescription(item.getDescription());
+        currentItem.setPrice(item.getPrice());
+        itemService.addNewItem(currentItem);
+        if(file !=null) {
+            currentItem.setImage(imageService.saveImage(currentItem.getId(),file));
+             itemService.addNewItem(currentItem);}
         return item;
     }
 

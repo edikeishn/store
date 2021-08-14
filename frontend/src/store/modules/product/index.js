@@ -15,7 +15,6 @@ const actions = {
   getProductItems ({commit}) {
     axios.get(`/api/items`).then((response) => {
     commit('UPDATE_PRODUCT_ITEMS', response.data);
-
     });
   },
   addNewItemToStock ({commit}, newItem) {
@@ -32,14 +31,25 @@ const actions = {
 
     });
 
+  },
+
+    editItemInStock (store,itemToEdit) {
+    let bodyFormData = new FormData();
+    var jsonObjectData = JSON.stringify(itemToEdit);
+    const blob = new Blob([jsonObjectData], {
+    type: 'application/json'
+    });
+    bodyFormData.append('item',blob);
+    if(itemToEdit.file) bodyFormData.append('file',itemToEdit.file, itemToEdit.file.name);
+    axios.post(`/api/items/edititem`,bodyFormData);
   }
+
 }
 
 const getters = {
   productItems: state => state.productItems,
   productItemFromId: (state) => (id) => {
-
-    return state.productItems.find(productItem => productItem.id === id)
+      return state.productItems.find(productItem => productItem.id === id)
   }
 }
 

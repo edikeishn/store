@@ -34,7 +34,7 @@ export default {
   methods: {
     updateInitialState() {
       this.$store.dispatch("getProductItems");
-
+      this.$store.dispatch("getCartItems");
     }
   }
 

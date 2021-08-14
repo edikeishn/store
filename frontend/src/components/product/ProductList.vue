@@ -19,7 +19,11 @@ export default {
 
   components: {
     ProductListItem
-  }
+  },
+  mounted() {
+  this.$store.dispatch("getProductItems");
+}
+
 }
 </script>
 

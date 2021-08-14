@@ -1,31 +1,19 @@
 <template>
 <div class="columns is-mobile">
   <div class="column is-half is-offset-one-quarter">
-    <AdminAddNewProductForm/>
+    <ProductItemEditForm/>
   </div>
 </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import AdminAddNewProductForm from './AdminAddNewProductForm';
+
+import ProductItemEditForm from '../form/ProductItemEditForm';
 
 export default {
   name: 'AdminAddProductItem',
-  computed: {
-    ...mapGetters([
-      'cartItems',
-      'cartTotal',
-      'cartQuantity'
-    ])
-  },
-  methods: {
-    ...mapActions([
-      'removeAllCartItems'
-    ])
-  },
   components: {
-    AdminAddNewProductForm
+    ProductItemEditForm
   },
 
 }
