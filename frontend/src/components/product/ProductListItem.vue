@@ -1,19 +1,37 @@
 <template>
-  <div class="item card">
+  <q-card class="my-card" >
     <router-link :to="{name: 'itemdetails', params: { id: productItem.id } }">
-      <img alt="Картинка" :src="productItem.image"/>
+        <q-img :src="productItem.image" />
     </router-link>
-    <h3>{{productItem.title}}</h3>
-    <p>Цена: {{productItem.price}}</p>
-    <span
-  @click="addCartItem(productItem)"
-  class="tag is-primary has-text-white">
-    В корзину
-</span>
-  </div>
+        <q-card-section>
+          <div class="row no-wrap items-center">
+            <div class="col text-h6 ellipsis">
+              {{productItem.title}}
+            </div>
+          </div>
+          <q-rating icon="favorite_border" color="red" v-model="stars" :max="5" size="32px" icon-selected="favorite" icon-half="favorite"/>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          <div class="text-subtitle1">
+            Цена: {{productItem.price}}
+          </div>
+          <div class="text-caption text-grey">
+
+          </div>
+        </q-card-section>
+
+        <q-separator />
+        <q-card-actions align="center">
+          <q-btn color="primary" round icon="shopping_cart"  @click="addCartItem(productItem)">
+
+          </q-btn>
+        </q-card-actions>
+      </q-card>
 </template>
 
 <script>
+import { ref } from 'vue'
 import { mapActions } from 'vuex';
 
 export default {
@@ -27,59 +45,17 @@ export default {
       return this.productItem.quantity>0;
       }
 
-    }
+    },
+    setup () {
+  return {
+    stars: ref(4)
+  }
+}
 }
 </script>
 
-<style scoped>
-.item {
-  width: 250px;
-  height: 306px;
-  margin: 5px;
-  border-radius: 10px;
-
-}
-
-.tag{
-  cursor: pointer;
-
-}
-
-@media (max-width:1328px) {
-  .item {
-    width: 240px;
-    }
-}
-@media (max-width:1328px) {
-  .item {
-    width: 230px;
-    }
-}
-
-@media (max-width:480px) {
-  .item {
-    width: 180px;
-    }
-
-img {
-      height: 150px;
-      width: auto;
-          }
-}
-
-
-img {
-        margin-top: 2px;
-        height: 200px;
-        width: auto;
-      }
-
-
-h3 {
-      margin: 6px;
-        }
-
-p {
-      margin: 6px;
-      }
+<style lang="sass" scoped>
+.my-card
+  width: 100%
+  width: 280px
 </style>

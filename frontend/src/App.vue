@@ -1,63 +1,22 @@
 <template>
-  <navbar-list/>
-  <div class="container main-container">
-    <section v-if="this.$route.path ==='/'" class="hero is-medium is-link hero-custom">
-  <div class="hero-body">
-    <p class="title">
-      Medium hero
-    </p>
-    <p class="subtitle">
-      Medium subtitle
-    </p>
-  </div>
-</section>
-    <router-view class="top"/>
-  </div>
+ <MainLayout/>
 </template>
 
-
 <script>
-import NavbarList from './components/navbar/NavbarList.vue'
+import { ref } from 'vue'
+import MainLayout from './components/layout/MainLayout.vue'
 
 export default {
   name: 'App',
 
   components: {
-  NavbarList
+    MainLayout
   },
 
-  created() {
-    this.updateInitialState();
-
-  },
-
-  methods: {
-    updateInitialState() {
-      this.$store.dispatch("getProductItems");
-      this.$store.dispatch("getCartItems");
+  setup () {
+    return {
+      leftDrawerOpen: ref(false)
     }
   }
-
-
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin: 0;
-  padding: 0;
-}
-.main-container {
-  margin-top: 4rem;
-}
-.hero-custom{
-  margin-top: 5.5rem
-}
-
-
-</style>

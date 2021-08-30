@@ -1,15 +1,17 @@
 <template>
-  <div id="products" class="main-container">
-      <div v-for="productItem in productItems" :key="productItem.id"
-        class="product-list--item">
+  <p/>
+  <main-baner/>
+  <q-list class="row justify-center q-gutter-lg">
+      <div v-for="productItem in productItems" :key="productItem.id">
         <ProductListItem :productItem="productItem"/>
       </div>
-  </div>
+  </q-list>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import ProductListItem from './ProductListItem';
+import MainBaner from '../viewelements/MainBaner';
 
 export default {
   name: 'ProductList',
@@ -18,7 +20,8 @@ export default {
   },
 
   components: {
-    ProductListItem
+    ProductListItem,
+    MainBaner
   },
   mounted() {
   this.$store.dispatch("getProductItems");
@@ -27,15 +30,6 @@ export default {
 }
 </script>
 
-<style scoped>
-
-.main-container {
-  clear: both;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-}
-
-
+<style >
 
 </style>
